@@ -1,0 +1,15 @@
+
+                GO
+              CREATE FUNCTION SF_GetAllPayments()
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT * FROM Payments
+);
+
+
+             
+     }
+  
+ 

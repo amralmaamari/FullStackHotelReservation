@@ -1,0 +1,15 @@
+
+                GO
+              CREATE FUNCTION SF_GetAllBookingGuests()
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT * FROM BookingGuests
+);
+
+
+             
+     }
+  
+ 

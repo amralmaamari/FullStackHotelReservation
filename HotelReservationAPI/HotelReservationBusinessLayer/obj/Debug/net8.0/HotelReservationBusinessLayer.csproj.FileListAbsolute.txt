@@ -1,0 +1,15 @@
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationBusinessLayer\bin\Debug\net8.0\HotelReservationBusinessLayer.deps.json
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationBusinessLayer\bin\Debug\net8.0\HotelReservationBusinessLayer.dll
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationBusinessLayer\bin\Debug\net8.0\HotelReservationBusinessLayer.pdb
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationBusinessLayer\bin\Debug\net8.0\HotelReservationDataLayer.dll
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationBusinessLayer\bin\Debug\net8.0\HotelReservationDataLayer.pdb
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationBusinessLayer\obj\Debug\net8.0\HotelReservationBusinessLayer.csproj.AssemblyReference.cache
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationBusinessLayer\obj\Debug\net8.0\HotelReservationBusinessLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationBusinessLayer\obj\Debug\net8.0\HotelReservationBusinessLayer.AssemblyInfoInputs.cache
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationBusinessLayer\obj\Debug\net8.0\HotelReservationBusinessLayer.AssemblyInfo.cs
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationBusinessLayer\obj\Debug\net8.0\HotelReservationBusinessLayer.csproj.CoreCompileInputs.cache
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationBusinessLayer\obj\Debug\net8.0\HotelRes.52E0D949.Up2Date
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationBusinessLayer\obj\Debug\net8.0\HotelReservationBusinessLayer.dll
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationBusinessLayer\obj\Debug\net8.0\refint\HotelReservationBusinessLayer.dll
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationBusinessLayer\obj\Debug\net8.0\HotelReservationBusinessLayer.pdb
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationBusinessLayer\obj\Debug\net8.0\ref\HotelReservationBusinessLayer.dll

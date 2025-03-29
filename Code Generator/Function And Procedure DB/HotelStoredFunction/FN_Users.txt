@@ -1,0 +1,15 @@
+
+                GO
+              CREATE FUNCTION SF_GetAllUsers()
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT * FROM Users
+);
+
+
+             
+     }
+  
+ 

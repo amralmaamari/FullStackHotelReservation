@@ -1,0 +1,134 @@
+
+                GO
+              CREATE PROCEDURE SP_AddNewHotelPhotos
+(
+    @HotelPhotoID int OUTPUT,
+    @HotelID int,
+    @PhotoURL nvarchar(100)
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        INSERT INTO HotelPhotos (
+            HotelID,
+            PhotoURL
+        ) VALUES (
+            @HotelID,
+            @PhotoURL
+        );
+        SELECT @HotelPhotoID = SCOPE_IDENTITY();
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+        SET @HotelPhotoID = NULL;
+    END CATCH;
+END;
+
+
+                GO
+              CREATE PROCEDURE SP_DeleteHotelPhotos
+(
+    @HotelPhotoID int
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        DELETE FROM HotelPhotos WHERE HotelPhotoID = @HotelPhotoID;
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+    END CATCH;
+END;
+ 
+
+                GO
+              CREATE PROCEDURE SP_GetHotelPhotosInfoByID
+(
+    @HotelPhotoID int
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        select * FROM HotelPhotos WHERE HotelPhotoID = @HotelPhotoID;
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+    END CATCH;
+END;
+
+
+                GO
+              
+        CREATE PROCEDURE SP_IsHotelPhotosExistsByHotelPhotoID
+        (
+            @HotelPhotoID int
+        )
+        AS
+        BEGIN
+            SET NOCOUNT ON;
+            BEGIN TRY
+                IF EXISTS (SELECT 1 FROM HotelPhotos WHERE HotelPhotoID = @HotelPhotoID)
+                BEGIN 
+                    RETURN 1;
+                END
+                ELSE
+                BEGIN
+                    RETURN 0;
+                END
+            END TRY
+            BEGIN CATCH
+                DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+                SELECT 
+                    @ErrorMessage = ERROR_MESSAGE(),
+                    @ErrorSeverity = ERROR_SEVERITY(),
+                    @ErrorState = ERROR_STATE();
+                RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+            END CATCH;
+        END;
+
+                GO
+              CREATE PROCEDURE SP_UpdateHotelPhotosByID
+    @HotelPhotoID int,
+    @HotelID int,
+    @PhotoURL nvarchar (100)  AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+    UPDATE HotelPhotos
+    SET
+        HotelID = @HotelID,
+        PhotoURL = @PhotoURL    WHERE HotelPhotoID = @HotelPhotoID;
+    END TRY
+    BEGIN CATCH
+        SELECT
+            ERROR_NUMBER() AS ErrorNumber,
+            ERROR_STATE() AS ErrorState,
+            ERROR_SEVERITY() AS ErrorSeverity,
+            ERROR_PROCEDURE() AS ErrorProcedure,
+            ERROR_LINE() AS ErrorLine,
+            ERROR_MESSAGE() AS ErrorMessage;
+    END CATCH;
+END;
+
+                        
+     }
+ 
+ 

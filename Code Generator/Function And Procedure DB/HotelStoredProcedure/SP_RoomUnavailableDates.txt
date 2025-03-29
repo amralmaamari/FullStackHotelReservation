@@ -1,0 +1,149 @@
+
+                GO
+              CREATE PROCEDURE SP_AddNewRoomUnavailableDates
+(
+    @RoomUnavailableDateID int OUTPUT,
+    @RoomID int,
+    @CheckIn datetime2,
+    @CheckOut datetime2,
+    @Reason nvarchar(100),
+    @IsActive bit
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        INSERT INTO RoomUnavailableDates (
+            RoomID,
+            CheckIn,
+            CheckOut,
+            Reason,
+            IsActive
+        ) VALUES (
+            @RoomID,
+            @CheckIn,
+            @CheckOut,
+            @Reason,
+            @IsActive
+        );
+        SELECT @RoomUnavailableDateID = SCOPE_IDENTITY();
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+        SET @RoomUnavailableDateID = NULL;
+    END CATCH;
+END;
+
+
+                GO
+              CREATE PROCEDURE SP_DeleteRoomUnavailableDates
+(
+    @RoomUnavailableDateID int
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        DELETE FROM RoomUnavailableDates WHERE RoomUnavailableDateID = @RoomUnavailableDateID;
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+    END CATCH;
+END;
+ 
+
+                GO
+              CREATE PROCEDURE SP_GetRoomUnavailableDatesInfoByID
+(
+    @RoomUnavailableDateID int
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        select * FROM RoomUnavailableDates WHERE RoomUnavailableDateID = @RoomUnavailableDateID;
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+    END CATCH;
+END;
+
+
+                GO
+              
+        CREATE PROCEDURE SP_IsRoomUnavailableDatesExistsByRoomUnavailableDateID
+        (
+            @RoomUnavailableDateID int
+        )
+        AS
+        BEGIN
+            SET NOCOUNT ON;
+            BEGIN TRY
+                IF EXISTS (SELECT 1 FROM RoomUnavailableDates WHERE RoomUnavailableDateID = @RoomUnavailableDateID)
+                BEGIN 
+                    RETURN 1;
+                END
+                ELSE
+                BEGIN
+                    RETURN 0;
+                END
+            END TRY
+            BEGIN CATCH
+                DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+                SELECT 
+                    @ErrorMessage = ERROR_MESSAGE(),
+                    @ErrorSeverity = ERROR_SEVERITY(),
+                    @ErrorState = ERROR_STATE();
+                RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+            END CATCH;
+        END;
+
+                GO
+              CREATE PROCEDURE SP_UpdateRoomUnavailableDatesByID
+    @RoomUnavailableDateID int,
+    @RoomID int,
+    @CheckIn datetime2,
+    @CheckOut datetime2,
+    @Reason nvarchar (100),
+    @IsActive bit  AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+    UPDATE RoomUnavailableDates
+    SET
+        RoomID = @RoomID,
+        CheckIn = @CheckIn,
+        CheckOut = @CheckOut,
+        Reason = @Reason,
+        IsActive = @IsActive    WHERE RoomUnavailableDateID = @RoomUnavailableDateID;
+    END TRY
+    BEGIN CATCH
+        SELECT
+            ERROR_NUMBER() AS ErrorNumber,
+            ERROR_STATE() AS ErrorState,
+            ERROR_SEVERITY() AS ErrorSeverity,
+            ERROR_PROCEDURE() AS ErrorProcedure,
+            ERROR_LINE() AS ErrorLine,
+            ERROR_MESSAGE() AS ErrorMessage;
+    END CATCH;
+END;
+
+                        
+     }
+ 
+ 

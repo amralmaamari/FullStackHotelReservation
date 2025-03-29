@@ -1,0 +1,134 @@
+
+                GO
+              CREATE PROCEDURE SP_AddNewBookingGuests
+(
+    @BookingGuestsID int OUTPUT,
+    @BookingID int,
+    @GuestID int
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        INSERT INTO BookingGuests (
+            BookingID,
+            GuestID
+        ) VALUES (
+            @BookingID,
+            @GuestID
+        );
+        SELECT @BookingGuestsID = SCOPE_IDENTITY();
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+        SET @BookingGuestsID = NULL;
+    END CATCH;
+END;
+
+
+                GO
+              CREATE PROCEDURE SP_DeleteBookingGuests
+(
+    @BookingGuestsID int
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        DELETE FROM BookingGuests WHERE BookingGuestsID = @BookingGuestsID;
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+    END CATCH;
+END;
+ 
+
+                GO
+              CREATE PROCEDURE SP_GetBookingGuestsInfoByID
+(
+    @BookingGuestsID int
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        select * FROM BookingGuests WHERE BookingGuestsID = @BookingGuestsID;
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+    END CATCH;
+END;
+
+
+                GO
+              
+        CREATE PROCEDURE SP_IsBookingGuestsExistsByBookingGuestsID
+        (
+            @BookingGuestsID int
+        )
+        AS
+        BEGIN
+            SET NOCOUNT ON;
+            BEGIN TRY
+                IF EXISTS (SELECT 1 FROM BookingGuests WHERE BookingGuestsID = @BookingGuestsID)
+                BEGIN 
+                    RETURN 1;
+                END
+                ELSE
+                BEGIN
+                    RETURN 0;
+                END
+            END TRY
+            BEGIN CATCH
+                DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+                SELECT 
+                    @ErrorMessage = ERROR_MESSAGE(),
+                    @ErrorSeverity = ERROR_SEVERITY(),
+                    @ErrorState = ERROR_STATE();
+                RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+            END CATCH;
+        END;
+
+                GO
+              CREATE PROCEDURE SP_UpdateBookingGuestsByID
+    @BookingGuestsID int,
+    @BookingID int,
+    @GuestID int  AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+    UPDATE BookingGuests
+    SET
+        BookingID = @BookingID,
+        GuestID = @GuestID    WHERE BookingGuestsID = @BookingGuestsID;
+    END TRY
+    BEGIN CATCH
+        SELECT
+            ERROR_NUMBER() AS ErrorNumber,
+            ERROR_STATE() AS ErrorState,
+            ERROR_SEVERITY() AS ErrorSeverity,
+            ERROR_PROCEDURE() AS ErrorProcedure,
+            ERROR_LINE() AS ErrorLine,
+            ERROR_MESSAGE() AS ErrorMessage;
+    END CATCH;
+END;
+
+                        
+     }
+ 
+ 

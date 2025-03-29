@@ -1,0 +1,129 @@
+
+                GO
+              CREATE PROCEDURE SP_AddNewHotelTypes
+(
+    @HotelTypeID int OUTPUT,
+    @TypeName nvarchar(100)
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        INSERT INTO HotelTypes (
+            TypeName
+        ) VALUES (
+            @TypeName
+        );
+        SELECT @HotelTypeID = SCOPE_IDENTITY();
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+        SET @HotelTypeID = NULL;
+    END CATCH;
+END;
+
+
+                GO
+              CREATE PROCEDURE SP_DeleteHotelTypes
+(
+    @HotelTypeID int
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        DELETE FROM HotelTypes WHERE HotelTypeID = @HotelTypeID;
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+    END CATCH;
+END;
+ 
+
+                GO
+              CREATE PROCEDURE SP_GetHotelTypesInfoByID
+(
+    @HotelTypeID int
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        select * FROM HotelTypes WHERE HotelTypeID = @HotelTypeID;
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+    END CATCH;
+END;
+
+
+                GO
+              
+        CREATE PROCEDURE SP_IsHotelTypesExistsByHotelTypeID
+        (
+            @HotelTypeID int
+        )
+        AS
+        BEGIN
+            SET NOCOUNT ON;
+            BEGIN TRY
+                IF EXISTS (SELECT 1 FROM HotelTypes WHERE HotelTypeID = @HotelTypeID)
+                BEGIN 
+                    RETURN 1;
+                END
+                ELSE
+                BEGIN
+                    RETURN 0;
+                END
+            END TRY
+            BEGIN CATCH
+                DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+                SELECT 
+                    @ErrorMessage = ERROR_MESSAGE(),
+                    @ErrorSeverity = ERROR_SEVERITY(),
+                    @ErrorState = ERROR_STATE();
+                RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+            END CATCH;
+        END;
+
+                GO
+              CREATE PROCEDURE SP_UpdateHotelTypesByID
+    @HotelTypeID int,
+    @TypeName nvarchar (100)  AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+    UPDATE HotelTypes
+    SET
+        TypeName = @TypeName    WHERE HotelTypeID = @HotelTypeID;
+    END TRY
+    BEGIN CATCH
+        SELECT
+            ERROR_NUMBER() AS ErrorNumber,
+            ERROR_STATE() AS ErrorState,
+            ERROR_SEVERITY() AS ErrorSeverity,
+            ERROR_PROCEDURE() AS ErrorProcedure,
+            ERROR_LINE() AS ErrorLine,
+            ERROR_MESSAGE() AS ErrorMessage;
+    END CATCH;
+END;
+
+                        
+     }
+ 
+ 

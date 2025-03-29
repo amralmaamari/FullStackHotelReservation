@@ -1,0 +1,179 @@
+
+                GO
+              CREATE PROCEDURE SP_AddNewHotels
+(
+    @HotelID int OUTPUT,
+    @HotelTypeID int,
+    @Name nvarchar(100),
+    @City nvarchar(100),
+    @Address nvarchar(100),
+    @Distance nvarchar(100),
+    @Title nvarchar(100),
+    @Description nvarchar(100),
+    @Rating decimal,
+    @Featured bit,
+    @CreatedAt datetime2,
+    @UpdateAt datetime2
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        INSERT INTO Hotels (
+            HotelTypeID,
+            Name,
+            City,
+            Address,
+            Distance,
+            Title,
+            Description,
+            Rating,
+            Featured,
+            CreatedAt,
+            UpdateAt
+        ) VALUES (
+            @HotelTypeID,
+            @Name,
+            @City,
+            @Address,
+            @Distance,
+            @Title,
+            @Description,
+            @Rating,
+            @Featured,
+            @CreatedAt,
+            @UpdateAt
+        );
+        SELECT @HotelID = SCOPE_IDENTITY();
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+        SET @HotelID = NULL;
+    END CATCH;
+END;
+
+
+                GO
+              CREATE PROCEDURE SP_DeleteHotels
+(
+    @HotelID int
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        DELETE FROM Hotels WHERE HotelID = @HotelID;
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+    END CATCH;
+END;
+ 
+
+                GO
+              CREATE PROCEDURE SP_GetHotelsInfoByID
+(
+    @HotelID int
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        select * FROM Hotels WHERE HotelID = @HotelID;
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+    END CATCH;
+END;
+
+
+                GO
+              
+        CREATE PROCEDURE SP_IsHotelsExistsByHotelID
+        (
+            @HotelID int
+        )
+        AS
+        BEGIN
+            SET NOCOUNT ON;
+            BEGIN TRY
+                IF EXISTS (SELECT 1 FROM Hotels WHERE HotelID = @HotelID)
+                BEGIN 
+                    RETURN 1;
+                END
+                ELSE
+                BEGIN
+                    RETURN 0;
+                END
+            END TRY
+            BEGIN CATCH
+                DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+                SELECT 
+                    @ErrorMessage = ERROR_MESSAGE(),
+                    @ErrorSeverity = ERROR_SEVERITY(),
+                    @ErrorState = ERROR_STATE();
+                RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+            END CATCH;
+        END;
+
+                GO
+              CREATE PROCEDURE SP_UpdateHotelsByID
+    @HotelID int,
+    @HotelTypeID int,
+    @Name nvarchar (100),
+    @City nvarchar (100),
+    @Address nvarchar (100),
+    @Distance nvarchar (100),
+    @Title nvarchar (100),
+    @Description nvarchar (100),
+    @Rating decimal,
+    @Featured bit,
+    @CreatedAt datetime2,
+    @UpdateAt datetime2  AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+    UPDATE Hotels
+    SET
+        HotelTypeID = @HotelTypeID,
+        Name = @Name,
+        City = @City,
+        Address = @Address,
+        Distance = @Distance,
+        Title = @Title,
+        Description = @Description,
+        Rating = @Rating,
+        Featured = @Featured,
+        CreatedAt = @CreatedAt,
+        UpdateAt = @UpdateAt    WHERE HotelID = @HotelID;
+    END TRY
+    BEGIN CATCH
+        SELECT
+            ERROR_NUMBER() AS ErrorNumber,
+            ERROR_STATE() AS ErrorState,
+            ERROR_SEVERITY() AS ErrorSeverity,
+            ERROR_PROCEDURE() AS ErrorProcedure,
+            ERROR_LINE() AS ErrorLine,
+            ERROR_MESSAGE() AS ErrorMessage;
+    END CATCH;
+END;
+
+                        
+     }
+ 
+ 

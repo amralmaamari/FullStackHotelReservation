@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "Xi0Xmmis/uqOmabjEF0hmR5wQMutu29qDzk4MpNkwwE=",
+  "Source": "HotelReservationAPI",
+  "BasePath": "_content/HotelReservationAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

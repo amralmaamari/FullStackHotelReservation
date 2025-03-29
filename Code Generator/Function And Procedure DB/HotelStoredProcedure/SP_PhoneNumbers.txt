@@ -1,0 +1,149 @@
+
+                GO
+              CREATE PROCEDURE SP_AddNewPhoneNumbers
+(
+    @PhoneNumbersID int OUTPUT,
+    @UserID int,
+    @PhoneNumber nvarchar(100),
+    @IsPrimary bit,
+    @CreatedAt datetime2,
+    @UpdatedAt datetime2
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        INSERT INTO PhoneNumbers (
+            UserID,
+            PhoneNumber,
+            IsPrimary,
+            CreatedAt,
+            UpdatedAt
+        ) VALUES (
+            @UserID,
+            @PhoneNumber,
+            @IsPrimary,
+            @CreatedAt,
+            @UpdatedAt
+        );
+        SELECT @PhoneNumbersID = SCOPE_IDENTITY();
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+        SET @PhoneNumbersID = NULL;
+    END CATCH;
+END;
+
+
+                GO
+              CREATE PROCEDURE SP_DeletePhoneNumbers
+(
+    @PhoneNumbersID int
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        DELETE FROM PhoneNumbers WHERE PhoneNumbersID = @PhoneNumbersID;
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+    END CATCH;
+END;
+ 
+
+                GO
+              CREATE PROCEDURE SP_GetPhoneNumbersInfoByID
+(
+    @PhoneNumbersID int
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        select * FROM PhoneNumbers WHERE PhoneNumbersID = @PhoneNumbersID;
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+    END CATCH;
+END;
+
+
+                GO
+              
+        CREATE PROCEDURE SP_IsPhoneNumbersExistsByPhoneNumbersID
+        (
+            @PhoneNumbersID int
+        )
+        AS
+        BEGIN
+            SET NOCOUNT ON;
+            BEGIN TRY
+                IF EXISTS (SELECT 1 FROM PhoneNumbers WHERE PhoneNumbersID = @PhoneNumbersID)
+                BEGIN 
+                    RETURN 1;
+                END
+                ELSE
+                BEGIN
+                    RETURN 0;
+                END
+            END TRY
+            BEGIN CATCH
+                DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+                SELECT 
+                    @ErrorMessage = ERROR_MESSAGE(),
+                    @ErrorSeverity = ERROR_SEVERITY(),
+                    @ErrorState = ERROR_STATE();
+                RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+            END CATCH;
+        END;
+
+                GO
+              CREATE PROCEDURE SP_UpdatePhoneNumbersByID
+    @PhoneNumbersID int,
+    @UserID int,
+    @PhoneNumber nvarchar (100),
+    @IsPrimary bit,
+    @CreatedAt datetime2,
+    @UpdatedAt datetime2  AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+    UPDATE PhoneNumbers
+    SET
+        UserID = @UserID,
+        PhoneNumber = @PhoneNumber,
+        IsPrimary = @IsPrimary,
+        CreatedAt = @CreatedAt,
+        UpdatedAt = @UpdatedAt    WHERE PhoneNumbersID = @PhoneNumbersID;
+    END TRY
+    BEGIN CATCH
+        SELECT
+            ERROR_NUMBER() AS ErrorNumber,
+            ERROR_STATE() AS ErrorState,
+            ERROR_SEVERITY() AS ErrorSeverity,
+            ERROR_PROCEDURE() AS ErrorProcedure,
+            ERROR_LINE() AS ErrorLine,
+            ERROR_MESSAGE() AS ErrorMessage;
+    END CATCH;
+END;
+
+                        
+     }
+ 
+ 

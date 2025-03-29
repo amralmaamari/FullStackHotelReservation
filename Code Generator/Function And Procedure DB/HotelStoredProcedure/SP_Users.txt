@@ -1,0 +1,169 @@
+
+                GO
+              CREATE PROCEDURE SP_AddNewUsers
+(
+    @UserID int OUTPUT,
+    @Username nvarchar(100),
+    @Email nvarchar(100),
+    @Password nvarchar(100),
+    @CountryID int,
+    @Image nvarchar(100),
+    @City nvarchar(100),
+    @IsAdmin bit,
+    @CreatedAt datetime2,
+    @UpdatedAt datetime2
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        INSERT INTO Users (
+            Username,
+            Email,
+            Password,
+            CountryID,
+            Image,
+            City,
+            IsAdmin,
+            CreatedAt,
+            UpdatedAt
+        ) VALUES (
+            @Username,
+            @Email,
+            @Password,
+            @CountryID,
+            @Image,
+            @City,
+            @IsAdmin,
+            @CreatedAt,
+            @UpdatedAt
+        );
+        SELECT @UserID = SCOPE_IDENTITY();
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+        SET @UserID = NULL;
+    END CATCH;
+END;
+
+
+                GO
+              CREATE PROCEDURE SP_DeleteUsers
+(
+    @UserID int
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        DELETE FROM Users WHERE UserID = @UserID;
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+    END CATCH;
+END;
+ 
+
+                GO
+              CREATE PROCEDURE SP_GetUsersInfoByID
+(
+    @UserID int
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        select * FROM Users WHERE UserID = @UserID;
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+    END CATCH;
+END;
+
+
+                GO
+              
+        CREATE PROCEDURE SP_IsUsersExistsByUserID
+        (
+            @UserID int
+        )
+        AS
+        BEGIN
+            SET NOCOUNT ON;
+            BEGIN TRY
+                IF EXISTS (SELECT 1 FROM Users WHERE UserID = @UserID)
+                BEGIN 
+                    RETURN 1;
+                END
+                ELSE
+                BEGIN
+                    RETURN 0;
+                END
+            END TRY
+            BEGIN CATCH
+                DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+                SELECT 
+                    @ErrorMessage = ERROR_MESSAGE(),
+                    @ErrorSeverity = ERROR_SEVERITY(),
+                    @ErrorState = ERROR_STATE();
+                RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+            END CATCH;
+        END;
+
+                GO
+              CREATE PROCEDURE SP_UpdateUsersByID
+    @UserID int,
+    @Username nvarchar (100),
+    @Email nvarchar (100),
+    @Password nvarchar (100),
+    @CountryID int,
+    @Image nvarchar (100),
+    @City nvarchar (100),
+    @IsAdmin bit,
+    @CreatedAt datetime2,
+    @UpdatedAt datetime2  AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+    UPDATE Users
+    SET
+        Username = @Username,
+        Email = @Email,
+        Password = @Password,
+        CountryID = @CountryID,
+        Image = @Image,
+        City = @City,
+        IsAdmin = @IsAdmin,
+        CreatedAt = @CreatedAt,
+        UpdatedAt = @UpdatedAt    WHERE UserID = @UserID;
+    END TRY
+    BEGIN CATCH
+        SELECT
+            ERROR_NUMBER() AS ErrorNumber,
+            ERROR_STATE() AS ErrorState,
+            ERROR_SEVERITY() AS ErrorSeverity,
+            ERROR_PROCEDURE() AS ErrorProcedure,
+            ERROR_LINE() AS ErrorLine,
+            ERROR_MESSAGE() AS ErrorMessage;
+    END CATCH;
+END;
+
+                        
+     }
+ 
+ 

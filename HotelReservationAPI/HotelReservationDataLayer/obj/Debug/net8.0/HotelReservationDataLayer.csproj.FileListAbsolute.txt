@@ -1,0 +1,12 @@
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationDataLayer\bin\Debug\net8.0\HotelReservationDataLayer.deps.json
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationDataLayer\bin\Debug\net8.0\HotelReservationDataLayer.dll
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationDataLayer\bin\Debug\net8.0\HotelReservationDataLayer.pdb
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationDataLayer\obj\Debug\net8.0\HotelReservationDataLayer.csproj.AssemblyReference.cache
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationDataLayer\obj\Debug\net8.0\HotelReservationDataLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationDataLayer\obj\Debug\net8.0\HotelReservationDataLayer.AssemblyInfoInputs.cache
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationDataLayer\obj\Debug\net8.0\HotelReservationDataLayer.AssemblyInfo.cs
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationDataLayer\obj\Debug\net8.0\HotelReservationDataLayer.csproj.CoreCompileInputs.cache
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationDataLayer\obj\Debug\net8.0\HotelReservationDataLayer.dll
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationDataLayer\obj\Debug\net8.0\refint\HotelReservationDataLayer.dll
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationDataLayer\obj\Debug\net8.0\HotelReservationDataLayer.pdb
+C:\Users\amr70\OneDrive\Desktop\Github\HotelReservationAPP\HotelReservationAPI\HotelReservationDataLayer\obj\Debug\net8.0\ref\HotelReservationDataLayer.dll

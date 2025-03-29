@@ -1,0 +1,15 @@
+
+                GO
+              CREATE FUNCTION SF_GetAllRoomTypes()
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT * FROM RoomTypes
+);
+
+
+             
+     }
+  
+ 

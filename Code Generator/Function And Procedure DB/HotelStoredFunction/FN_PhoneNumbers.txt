@@ -1,0 +1,15 @@
+
+                GO
+              CREATE FUNCTION SF_GetAllPhoneNumbers()
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT * FROM PhoneNumbers
+);
+
+
+             
+     }
+  
+ 

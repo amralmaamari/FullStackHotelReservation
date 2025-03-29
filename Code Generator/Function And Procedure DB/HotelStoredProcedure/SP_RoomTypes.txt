@@ -1,0 +1,149 @@
+
+                GO
+              CREATE PROCEDURE SP_AddNewRoomTypes
+(
+    @RoomTypeID int OUTPUT,
+    @Title nvarchar(100),
+    @MaxPeople int,
+    @Description nvarchar(100),
+    @CreatedAt datetime2,
+    @UpdateAt datetime2
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        INSERT INTO RoomTypes (
+            Title,
+            MaxPeople,
+            Description,
+            CreatedAt,
+            UpdateAt
+        ) VALUES (
+            @Title,
+            @MaxPeople,
+            @Description,
+            @CreatedAt,
+            @UpdateAt
+        );
+        SELECT @RoomTypeID = SCOPE_IDENTITY();
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+        SET @RoomTypeID = NULL;
+    END CATCH;
+END;
+
+
+                GO
+              CREATE PROCEDURE SP_DeleteRoomTypes
+(
+    @RoomTypeID int
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        DELETE FROM RoomTypes WHERE RoomTypeID = @RoomTypeID;
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+    END CATCH;
+END;
+ 
+
+                GO
+              CREATE PROCEDURE SP_GetRoomTypesInfoByID
+(
+    @RoomTypeID int
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        select * FROM RoomTypes WHERE RoomTypeID = @RoomTypeID;
+    END TRY
+    BEGIN CATCH
+        DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+    END CATCH;
+END;
+
+
+                GO
+              
+        CREATE PROCEDURE SP_IsRoomTypesExistsByRoomTypeID
+        (
+            @RoomTypeID int
+        )
+        AS
+        BEGIN
+            SET NOCOUNT ON;
+            BEGIN TRY
+                IF EXISTS (SELECT 1 FROM RoomTypes WHERE RoomTypeID = @RoomTypeID)
+                BEGIN 
+                    RETURN 1;
+                END
+                ELSE
+                BEGIN
+                    RETURN 0;
+                END
+            END TRY
+            BEGIN CATCH
+                DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT, @ErrorState INT;
+                SELECT 
+                    @ErrorMessage = ERROR_MESSAGE(),
+                    @ErrorSeverity = ERROR_SEVERITY(),
+                    @ErrorState = ERROR_STATE();
+                RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+            END CATCH;
+        END;
+
+                GO
+              CREATE PROCEDURE SP_UpdateRoomTypesByID
+    @RoomTypeID int,
+    @Title nvarchar (100),
+    @MaxPeople int,
+    @Description nvarchar (100),
+    @CreatedAt datetime2,
+    @UpdateAt datetime2  AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+    UPDATE RoomTypes
+    SET
+        Title = @Title,
+        MaxPeople = @MaxPeople,
+        Description = @Description,
+        CreatedAt = @CreatedAt,
+        UpdateAt = @UpdateAt    WHERE RoomTypeID = @RoomTypeID;
+    END TRY
+    BEGIN CATCH
+        SELECT
+            ERROR_NUMBER() AS ErrorNumber,
+            ERROR_STATE() AS ErrorState,
+            ERROR_SEVERITY() AS ErrorSeverity,
+            ERROR_PROCEDURE() AS ErrorProcedure,
+            ERROR_LINE() AS ErrorLine,
+            ERROR_MESSAGE() AS ErrorMessage;
+    END CATCH;
+END;
+
+                        
+     }
+ 
+ 
