@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using HotelDataAccessLayer;
 using HotelReservationAPI.Model;
+using HotelReservationDataLayer.Model;
 
 namespace Hotel_Business
 {
@@ -71,6 +72,21 @@ namespace Hotel_Business
             Mode = enMode.AddNew;
         }
 
+        public static clsUsers FromSignUpDTO(SignUpDTO dto)
+        {
+            return new clsUsers
+            {
+                Username = dto.Username,
+                Email = dto.Email,
+                Password = dto.Password, // Assuming HashPassword is a method to hash passwords
+                CountryID = dto.CountryID ?? 1 ,
+                Image = dto.Image??"ss",
+                City = dto.City??"ss",
+                IsAdmin = false, // Default value, could also come from DTO if needed
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+        }
         public clsUsers(UserDTO users, enMode mode = enMode.AddNew)
         {
 
@@ -157,6 +173,10 @@ namespace Hotel_Business
 
         }
 
+        public static UserDTO GetUsersInfoByEmail(string Email)
+        {
+            return   clsUsersData.GetUsersInfoByEmail(Email);
+        }
 
         public static async Task<bool> IsUserExists(LoginDTO loginDTO)
         {

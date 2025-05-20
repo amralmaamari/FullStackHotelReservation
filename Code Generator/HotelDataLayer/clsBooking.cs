@@ -11,25 +11,21 @@
                 {
                     	 public int BookingID  {get; set;}
 	 public int UserID  {get; set;}
-	 public int RoomInstancesID  {get; set;}
+	 public DateTime CheckIn  {get; set;}
+	 public DateTime CheckOut  {get; set;}
 	 public int BookingStatusID  {get; set;}
-	 public int ApplicationStatus  {get; set;}
 	 public DateTime CreatedAt  {get; set;}
 	 public DateTime UpdatedAt  {get; set;}
-	 public decimal PaidFees  {get; set;}
-	 public int CreatedByUserID  {get; set;}
             
                     
-            public BookingDTO( int  BookingID,  int  UserID,  int  RoomInstancesID,  int  BookingStatusID,  int  ApplicationStatus,  DateTime  CreatedAt,  DateTime  UpdatedAt,  decimal  PaidFees,  int  CreatedByUserID){
+            public BookingDTO( int  BookingID,  int  UserID,  DateTime  CheckIn,  DateTime  CheckOut,  int  BookingStatusID,  DateTime  CreatedAt,  DateTime  UpdatedAt){
 this.BookingID = BookingID ;
 this.UserID = UserID ;
-this.RoomInstancesID = RoomInstancesID ;
+this.CheckIn = CheckIn ;
+this.CheckOut = CheckOut ;
 this.BookingStatusID = BookingStatusID ;
-this.ApplicationStatus = ApplicationStatus ;
 this.CreatedAt = CreatedAt ;
-this.UpdatedAt = UpdatedAt ;
-this.PaidFees = PaidFees ;
-this.CreatedByUserID = CreatedByUserID ;   
+this.UpdatedAt = UpdatedAt ;   
                 }
                 }
                 
@@ -58,13 +54,11 @@ this.CreatedByUserID = CreatedByUserID ;
                             var booking = new BookingDTO(
                                 						 BookingID:(int)reader ["BookingID"] ,
 						 UserID:(int)reader ["UserID"] ,
-						 RoomInstancesID:(int)reader ["RoomInstancesID"] ,
+						 CheckIn:(DateTime)reader ["CheckIn"] ,
+						 CheckOut:(DateTime)reader ["CheckOut"] ,
 						 BookingStatusID:(int)reader ["BookingStatusID"] ,
-						 ApplicationStatus:(int)reader ["ApplicationStatus"] ,
 						 CreatedAt:(DateTime)reader ["CreatedAt"] ,
 						 UpdatedAt:(DateTime)reader ["UpdatedAt"] ,
-						 PaidFees:(decimal)reader ["PaidFees"] ,
-						 CreatedByUserID:(int)reader ["CreatedByUserID"] ,
 
                             );
 
@@ -99,13 +93,11 @@ this.CreatedByUserID = CreatedByUserID ;
                         command.CommandType = CommandType.StoredProcedure;
 
                        						command.Parameters.AddWithValue("@UserID", booking.UserID);
-						command.Parameters.AddWithValue("@RoomInstancesID", booking.RoomInstancesID);
+						command.Parameters.AddWithValue("@CheckIn", booking.CheckIn);
+						command.Parameters.AddWithValue("@CheckOut", booking.CheckOut);
 						command.Parameters.AddWithValue("@BookingStatusID", booking.BookingStatusID);
-						command.Parameters.AddWithValue("@ApplicationStatus", booking.ApplicationStatus);
 						command.Parameters.AddWithValue("@CreatedAt", booking.CreatedAt);
 						command.Parameters.AddWithValue("@UpdatedAt", booking.UpdatedAt);
-						command.Parameters.AddWithValue("@PaidFees", booking.PaidFees);
-						command.Parameters.AddWithValue("@CreatedByUserID", booking.CreatedByUserID);
 ;
                         SqlParameter outputIdParam = new SqlParameter("@BookingID", SqlDbType.Int);
                         {
@@ -155,13 +147,11 @@ this.CreatedByUserID = CreatedByUserID ;
 
                             						 BookingID:(int)reader ["BookingID"],
 						 UserID:(int)reader ["UserID"],
-						 RoomInstancesID:(int)reader ["RoomInstancesID"],
+						 CheckIn:(DateTime)reader ["CheckIn"],
+						 CheckOut:(DateTime)reader ["CheckOut"],
 						 BookingStatusID:(int)reader ["BookingStatusID"],
-						 ApplicationStatus:(int)reader ["ApplicationStatus"],
 						 CreatedAt:(DateTime)reader ["CreatedAt"],
 						 UpdatedAt:(DateTime)reader ["UpdatedAt"],
-						 PaidFees:(decimal)reader ["PaidFees"],
-						 CreatedByUserID:(int)reader ["CreatedByUserID"],
 
                             );
                         
@@ -195,13 +185,11 @@ this.CreatedByUserID = CreatedByUserID ;
                         command.CommandType = CommandType.StoredProcedure;
                        						command.Parameters.AddWithValue("@BookingID", booking.BookingID);
 						command.Parameters.AddWithValue("@UserID", booking.UserID);
-						command.Parameters.AddWithValue("@RoomInstancesID", booking.RoomInstancesID);
+						command.Parameters.AddWithValue("@CheckIn", booking.CheckIn);
+						command.Parameters.AddWithValue("@CheckOut", booking.CheckOut);
 						command.Parameters.AddWithValue("@BookingStatusID", booking.BookingStatusID);
-						command.Parameters.AddWithValue("@ApplicationStatus", booking.ApplicationStatus);
 						command.Parameters.AddWithValue("@CreatedAt", booking.CreatedAt);
 						command.Parameters.AddWithValue("@UpdatedAt", booking.UpdatedAt);
-						command.Parameters.AddWithValue("@PaidFees", booking.PaidFees);
-						command.Parameters.AddWithValue("@CreatedByUserID", booking.CreatedByUserID);
 ;
                         rowAffected = command.ExecuteNonQuery();
 

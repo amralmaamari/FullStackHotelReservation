@@ -3,6 +3,7 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 using HotelDataAccessLayer;
+using HotelReservationDataLayer.Model;
 
 namespace Hotel_Business
 {
@@ -32,6 +33,7 @@ namespace Hotel_Business
 
         public int RoomID { get; set; }
         public int RoomTypeID { get; set; }
+       public clsRoomTypes RoomTypeInfo { get; set; }
         public int HotelID { get; set; }
         public string RoomNumber { get; set; }
         public decimal Price { get; set; }
@@ -64,6 +66,7 @@ namespace Hotel_Business
             this.RoomID = rooms.RoomID;
 
             this.RoomTypeID = rooms.RoomTypeID;
+            RoomTypeInfo = clsRoomTypes.GetRoomTypesInfoByID(this.RoomTypeID);
 
             this.HotelID = rooms.HotelID;
 
@@ -138,7 +141,7 @@ namespace Hotel_Business
 
         }
 
-        public static List<RoomDTO> GetAllRoomsOfHotelID(int HotelID)
+        public static List<RoomReserveDTO> GetAllRoomsOfHotelID(int HotelID)
         {
             return clsRoomsData.GetAllRoomsOfHotelID(HotelID);
         }

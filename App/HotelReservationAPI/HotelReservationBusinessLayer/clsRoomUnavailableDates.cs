@@ -24,7 +24,7 @@ namespace Hotel_Business
               this.CheckOut,
               this.Reason,
               this.IsActive
-        
+
                );
             }
         }
@@ -130,6 +130,10 @@ namespace Hotel_Business
         {
             return clsRoomUnavailableDatesData.DeleteRoomUnavailableDates(RoomUnavailableDateID);
 
+        }
+        public static bool DeactivateRoomUnavailableByBooking(int BookingID)
+        {
+            return clsRoomUnavailableDatesData.DeactivateRoomUnavailableByBooking(BookingID);
         }
 
         public static async Task<bool> IsRoomAvailableBetweenDates(int RoomID, DateTime CheckIn, DateTime CheckOut)

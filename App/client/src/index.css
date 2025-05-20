@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    /* Base button */
+    .btn {
+      @apply inline-flex items-center justify-center font-semibold rounded-s transition-all duration-200 ease-in-out;
+    }
+  
+    /* Primary: Continue / Confirm */
+    .btn-primary {
+      @apply btn px-6 py-3
+        bg-gradient-to-r from-green-500 to-green-600
+        text-white shadow-lg
+        hover:from-green-600 hover:to-green-700
+        active:scale-95
+        focus:outline-none focus:ring-4 focus:ring-green-300;
+    }
+  
+    /* Secondary: Back / Summary */
+    .btn-secondary {
+      @apply btn px-5 py-2
+        bg-white border border-gray-300
+        text-gray-800 shadow-sm
+        hover:bg-gray-100
+        active:scale-95
+        focus:outline-none focus:ring-4 focus:ring-gray-200;
+    }
+  
+    /* Danger: Cancel */
+    .btn-danger {
+      @apply btn px-6 py-3
+        bg-gradient-to-r from-red-500 to-red-600
+        text-white shadow-lg
+        hover:from-red-600 hover:to-red-700
+        active:scale-95
+        focus:outline-none focus:ring-4 focus:ring-red-300;
+    }
+  }
+  

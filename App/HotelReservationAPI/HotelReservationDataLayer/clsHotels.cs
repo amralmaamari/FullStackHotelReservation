@@ -4,6 +4,7 @@ using System.Data;
 using HotelReservationDataLayer;
 using HotelReservationDataLayer.Model;
 using Microsoft.Data.SqlClient;
+using Newtonsoft.Json;
 
 
 namespace HotelDataAccessLayer
@@ -222,6 +223,8 @@ namespace HotelDataAccessLayer
                         {
                             if (reader.Read())
                             {
+                                var photosJson = reader["Photos"].ToString();
+                                var photos = JsonConvert.DeserializeObject<List<HotelDetailsDTO.PhotoDTO>>(photosJson);
                                 return new HotelDetailsDTO(
                                     HotelID: (int)reader["HotelID"],
                                     TypeName: reader["TypeName"].ToString(),
@@ -229,7 +232,7 @@ namespace HotelDataAccessLayer
                                     City: reader["City"].ToString(),
                                     Address: reader["Address"].ToString(),
                                     Distance: reader["Distance"]?.ToString(),
-                                    Photos: reader["Photos"]?.ToString(),
+                                    Photos: photos,
                                     Rooms: reader["Rooms"]?.ToString(),
                                     Title: reader["Title"].ToString(),
                                     Description: reader["Description"].ToString(),
@@ -325,7 +328,7 @@ namespace HotelDataAccessLayer
         }
 
 
-        public static List<HotelDetailsDTO> GetAllHotelsDetailsParameters(int pageSize, decimal minPrice, decimal maxPrice)
+        public static List<HotelDetailsDTO> GetAllHotelsDetailsParameters(int pageSize,string city, decimal minPrice, decimal maxPrice)
         {
             var hotelsDetailsList = new List<HotelDetailsDTO>();
 
@@ -333,7 +336,7 @@ namespace HotelDataAccessLayer
             {
                 connection.Open();
 
-                string query = @"SELECT * FROM FN_GetAllHotelsDetailsParameters(@Page, @PageSize, @MinPrice, @MaxPrice)";
+                string query = @"SELECT * FROM FN_GetAllHotelsDetailsParameters(@Page, @PageSize,@City, @MinPrice, @MaxPrice)";
 
                 try
                 {
@@ -344,6 +347,7 @@ namespace HotelDataAccessLayer
                         // Add parameters safely
                         command.Parameters.AddWithValue("@Page", 1);
                         command.Parameters.AddWithValue("@PageSize", pageSize);
+                        command.Parameters.AddWithValue("@City", city);
                         command.Parameters.AddWithValue("@MinPrice", minPrice);
                         command.Parameters.AddWithValue("@MaxPrice", maxPrice);
 
@@ -351,6 +355,8 @@ namespace HotelDataAccessLayer
                         {
                             while (reader.Read())
                             {
+                                var photosJson = reader["Photos"].ToString();
+                                var photos = JsonConvert.DeserializeObject<List<HotelDetailsDTO.PhotoDTO>>(photosJson);
                                 var hotel = new HotelDetailsDTO(
                                     HotelID: (int)reader["HotelID"],
                                     TypeName: reader["TypeName"].ToString(),
@@ -358,7 +364,7 @@ namespace HotelDataAccessLayer
                                     City: reader["City"].ToString(),
                                     Address: reader["Address"].ToString(),
                                     Distance: reader["Distance"]?.ToString(),
-                                    Photos: reader["Photos"]?.ToString(),
+                                    Photos: photos,
                                     Rooms: reader["Rooms"]?.ToString(),
                                     Title: reader["Title"].ToString(),
                                     Description: reader["Description"].ToString(),

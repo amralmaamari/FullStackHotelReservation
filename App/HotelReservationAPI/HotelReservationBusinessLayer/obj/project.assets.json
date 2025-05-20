@@ -420,6 +420,19 @@
           }
         }
       },
+      "Newtonsoft.Json/13.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.ClientModel/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -647,7 +660,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
-          "Microsoft.Data.SqlClient": "6.0.1"
+          "Microsoft.Data.SqlClient": "6.0.1",
+          "Newtonsoft.Json": "13.0.3"
         },
         "compile": {
           "bin/placeholder/HotelReservationDataLayer.dll": {}
@@ -1268,6 +1282,36 @@
         "microsoft.sqlserver.server.nuspec"
       ]
     },
+    "Newtonsoft.Json/13.0.3": {
+      "sha512": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
+      "type": "package",
+      "path": "newtonsoft.json/13.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "README.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/net6.0/Newtonsoft.Json.dll",
+        "lib/net6.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "newtonsoft.json.13.0.3.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
+      ]
+    },
     "System.ClientModel/1.0.0": {
       "sha512": "I3CVkvxeqFYjIVEP59DnjbeoGNfo/+SZrCLpRz2v/g0gpCHaEMPtWSY0s9k/7jR1rAsLNg2z2u1JRB76tPjnIw==",
       "type": "package",
@@ -1690,11 +1734,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\amr70\\OneDrive\\Desktop\\Github\\HotelReservationAPP\\HotelReservationAPI\\HotelReservationBusinessLayer\\HotelReservationBusinessLayer.csproj",
+      "projectUniqueName": "D:\\Github\\HotelReservationAPP\\App\\HotelReservationAPI\\HotelReservationBusinessLayer\\HotelReservationBusinessLayer.csproj",
       "projectName": "HotelReservationBusinessLayer",
-      "projectPath": "C:\\Users\\amr70\\OneDrive\\Desktop\\Github\\HotelReservationAPP\\HotelReservationAPI\\HotelReservationBusinessLayer\\HotelReservationBusinessLayer.csproj",
+      "projectPath": "D:\\Github\\HotelReservationAPP\\App\\HotelReservationAPI\\HotelReservationBusinessLayer\\HotelReservationBusinessLayer.csproj",
       "packagesPath": "C:\\Users\\amr70\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\amr70\\OneDrive\\Desktop\\Github\\HotelReservationAPP\\HotelReservationAPI\\HotelReservationBusinessLayer\\obj\\",
+      "outputPath": "D:\\Github\\HotelReservationAPP\\App\\HotelReservationAPI\\HotelReservationBusinessLayer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1715,8 +1759,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\amr70\\OneDrive\\Desktop\\Github\\HotelReservationAPP\\HotelReservationAPI\\HotelReservationDataLayer\\HotelReservationDataLayer.csproj": {
-              "projectPath": "C:\\Users\\amr70\\OneDrive\\Desktop\\Github\\HotelReservationAPP\\HotelReservationAPI\\HotelReservationDataLayer\\HotelReservationDataLayer.csproj"
+            "D:\\Github\\HotelReservationAPP\\App\\HotelReservationAPI\\HotelReservationDataLayer\\HotelReservationDataLayer.csproj": {
+              "projectPath": "D:\\Github\\HotelReservationAPP\\App\\HotelReservationAPI\\HotelReservationDataLayer\\HotelReservationDataLayer.csproj"
             }
           }
         }

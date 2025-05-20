@@ -114,15 +114,16 @@ namespace HotelReservationAPI.Controllers
         }
 
     
-        [HttpGet("getHotels")]
+        [HttpGet("hotels")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<List<HotelDetailsDTO>> GetAllHotels(
             [FromQuery] decimal min = 0,
+            [FromQuery] string destination = "",
             [FromQuery] decimal max = 999,
             [FromQuery] int limit = 6)
         {
-            var hotelList = clsHotels.GetAllHotelsDetailsParameters(limit, min, max);
+            var hotelList = clsHotels.GetAllHotelsDetailsParameters(limit, destination, min, max);
 
             if (hotelList == null || hotelList.Count == 0)
             {
@@ -231,11 +232,11 @@ namespace HotelReservationAPI.Controllers
 
         }
 
-        [HttpGet("getAllRooms{id}", Name = "getAllRoomsOfHotelID")]
+        [HttpGet("rooms/details", Name = "getAllRoomsOfHotelID")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public  ActionResult GetAllRoomsOfHotelID(int id)
+        public  ActionResult GetAllRoomsOfHotelID( int id)
         {
             if (id < 1)
             {

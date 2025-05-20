@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\amr70\\OneDrive\\Desktop\\Github\\HotelReservationAPP\\HotelReservationAPI\\HotelReservationAPI\\HotelReservationAPI.csproj": {}
+    "D:\\Github\\HotelReservationAPP\\App\\HotelReservationAPI\\HotelReservationAPI\\HotelReservationAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\amr70\\OneDrive\\Desktop\\Github\\HotelReservationAPP\\HotelReservationAPI\\HotelReservationAPI\\HotelReservationAPI.csproj": {
+    "D:\\Github\\HotelReservationAPP\\App\\HotelReservationAPI\\HotelReservationAPI\\HotelReservationAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\amr70\\OneDrive\\Desktop\\Github\\HotelReservationAPP\\HotelReservationAPI\\HotelReservationAPI\\HotelReservationAPI.csproj",
+        "projectUniqueName": "D:\\Github\\HotelReservationAPP\\App\\HotelReservationAPI\\HotelReservationAPI\\HotelReservationAPI.csproj",
         "projectName": "HotelReservationAPI",
-        "projectPath": "C:\\Users\\amr70\\OneDrive\\Desktop\\Github\\HotelReservationAPP\\HotelReservationAPI\\HotelReservationAPI\\HotelReservationAPI.csproj",
+        "projectPath": "D:\\Github\\HotelReservationAPP\\App\\HotelReservationAPI\\HotelReservationAPI\\HotelReservationAPI.csproj",
         "packagesPath": "C:\\Users\\amr70\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\amr70\\OneDrive\\Desktop\\Github\\HotelReservationAPP\\HotelReservationAPI\\HotelReservationAPI\\obj\\",
+        "outputPath": "D:\\Github\\HotelReservationAPP\\App\\HotelReservationAPI\\HotelReservationAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,8 +32,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\amr70\\OneDrive\\Desktop\\Github\\HotelReservationAPP\\HotelReservationAPI\\HotelReservationBusinessLayer\\HotelReservationBusinessLayer.csproj": {
-                "projectPath": "C:\\Users\\amr70\\OneDrive\\Desktop\\Github\\HotelReservationAPP\\HotelReservationAPI\\HotelReservationBusinessLayer\\HotelReservationBusinessLayer.csproj"
+              "D:\\Github\\HotelReservationAPP\\App\\HotelReservationAPI\\HotelReservationBusinessLayer\\HotelReservationBusinessLayer.csproj": {
+                "projectPath": "D:\\Github\\HotelReservationAPP\\App\\HotelReservationAPI\\HotelReservationBusinessLayer\\HotelReservationBusinessLayer.csproj"
               }
             }
           }
@@ -54,9 +54,17 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.15, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.6.2, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.8.0, )"
             }
           },
           "imports": [
@@ -82,14 +90,14 @@
         }
       }
     },
-    "C:\\Users\\amr70\\OneDrive\\Desktop\\Github\\HotelReservationAPP\\HotelReservationAPI\\HotelReservationBusinessLayer\\HotelReservationBusinessLayer.csproj": {
+    "D:\\Github\\HotelReservationAPP\\App\\HotelReservationAPI\\HotelReservationBusinessLayer\\HotelReservationBusinessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\amr70\\OneDrive\\Desktop\\Github\\HotelReservationAPP\\HotelReservationAPI\\HotelReservationBusinessLayer\\HotelReservationBusinessLayer.csproj",
+        "projectUniqueName": "D:\\Github\\HotelReservationAPP\\App\\HotelReservationAPI\\HotelReservationBusinessLayer\\HotelReservationBusinessLayer.csproj",
         "projectName": "HotelReservationBusinessLayer",
-        "projectPath": "C:\\Users\\amr70\\OneDrive\\Desktop\\Github\\HotelReservationAPP\\HotelReservationAPI\\HotelReservationBusinessLayer\\HotelReservationBusinessLayer.csproj",
+        "projectPath": "D:\\Github\\HotelReservationAPP\\App\\HotelReservationAPI\\HotelReservationBusinessLayer\\HotelReservationBusinessLayer.csproj",
         "packagesPath": "C:\\Users\\amr70\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\amr70\\OneDrive\\Desktop\\Github\\HotelReservationAPP\\HotelReservationAPI\\HotelReservationBusinessLayer\\obj\\",
+        "outputPath": "D:\\Github\\HotelReservationAPP\\App\\HotelReservationAPI\\HotelReservationBusinessLayer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -110,8 +118,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\amr70\\OneDrive\\Desktop\\Github\\HotelReservationAPP\\HotelReservationAPI\\HotelReservationDataLayer\\HotelReservationDataLayer.csproj": {
-                "projectPath": "C:\\Users\\amr70\\OneDrive\\Desktop\\Github\\HotelReservationAPP\\HotelReservationAPI\\HotelReservationDataLayer\\HotelReservationDataLayer.csproj"
+              "D:\\Github\\HotelReservationAPP\\App\\HotelReservationAPI\\HotelReservationDataLayer\\HotelReservationDataLayer.csproj": {
+                "projectPath": "D:\\Github\\HotelReservationAPP\\App\\HotelReservationAPI\\HotelReservationDataLayer\\HotelReservationDataLayer.csproj"
               }
             }
           }
@@ -151,14 +159,14 @@
         }
       }
     },
-    "C:\\Users\\amr70\\OneDrive\\Desktop\\Github\\HotelReservationAPP\\HotelReservationAPI\\HotelReservationDataLayer\\HotelReservationDataLayer.csproj": {
+    "D:\\Github\\HotelReservationAPP\\App\\HotelReservationAPI\\HotelReservationDataLayer\\HotelReservationDataLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\amr70\\OneDrive\\Desktop\\Github\\HotelReservationAPP\\HotelReservationAPI\\HotelReservationDataLayer\\HotelReservationDataLayer.csproj",
+        "projectUniqueName": "D:\\Github\\HotelReservationAPP\\App\\HotelReservationAPI\\HotelReservationDataLayer\\HotelReservationDataLayer.csproj",
         "projectName": "HotelReservationDataLayer",
-        "projectPath": "C:\\Users\\amr70\\OneDrive\\Desktop\\Github\\HotelReservationAPP\\HotelReservationAPI\\HotelReservationDataLayer\\HotelReservationDataLayer.csproj",
+        "projectPath": "D:\\Github\\HotelReservationAPP\\App\\HotelReservationAPI\\HotelReservationDataLayer\\HotelReservationDataLayer.csproj",
         "packagesPath": "C:\\Users\\amr70\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\amr70\\OneDrive\\Desktop\\Github\\HotelReservationAPP\\HotelReservationAPI\\HotelReservationDataLayer\\obj\\",
+        "outputPath": "D:\\Github\\HotelReservationAPP\\App\\HotelReservationAPI\\HotelReservationDataLayer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -200,6 +208,10 @@
             "Microsoft.Data.SqlClient": {
               "target": "Package",
               "version": "[6.0.1, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
             }
           },
           "imports": [

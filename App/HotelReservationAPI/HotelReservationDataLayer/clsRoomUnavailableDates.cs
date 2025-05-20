@@ -59,7 +59,7 @@ namespace HotelDataAccessLayer
                              CheckOut: (DateTime)reader["CheckOut"],
                              Reason: (string)reader["Reason"],
                              IsActive: (bool)reader["IsActive"]
-    
+
 
                                 );
 
@@ -152,7 +152,7 @@ namespace HotelDataAccessLayer
                              CheckOut: (DateTime)reader["CheckOut"],
                              Reason: (string)reader["Reason"],
                              IsActive: (bool)reader["IsActive"]
-    
+
 
                                 );
 
@@ -238,6 +238,37 @@ namespace HotelDataAccessLayer
         }
 
 
+
+        public static bool DeactivateRoomUnavailableByBooking(int BookingID)
+        {
+
+            Nullable<int> rowAffected = null;
+            using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+            {
+                connection.Open();
+
+
+                try
+                {
+                    using (SqlCommand command = new SqlCommand("SP_DeactivateRoomUnavailableByBooking", connection))
+                    {
+
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@BookingID ", BookingID);
+
+                        rowAffected = command.ExecuteNonQuery();
+
+
+
+                    }
+                }
+                catch (Exception ex) { }
+
+                return (rowAffected != 0);
+            }
+
+
+        }
 
         public static async Task<bool> IsRoomAvailableBetweenDates(int RoomID, DateTime CheckIn, DateTime CheckOut)
         {

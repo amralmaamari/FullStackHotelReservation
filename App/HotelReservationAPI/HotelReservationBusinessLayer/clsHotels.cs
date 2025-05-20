@@ -192,9 +192,9 @@ namespace Hotel_Business
         }
 
 
-        public static List<HotelDetailsDTO> GetAllHotelsDetailsParameters( int pageSize, decimal minPrice, decimal maxPrice)
+        public static List<HotelDetailsDTO> GetAllHotelsDetailsParameters( int pageSize,string city, decimal minPrice, decimal maxPrice)
         {
-            return clsHotelsData.GetAllHotelsDetailsParameters(pageSize, minPrice, maxPrice); 
+            return clsHotelsData.GetAllHotelsDetailsParameters(pageSize, city, minPrice, maxPrice); 
         }
 
         public static async Task<int> CountHotelsByCity(string city)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static HotelReservationDataLayer.Model.HotelDetailsDTO;
 
 namespace HotelReservationDataLayer.Model
 {
@@ -15,7 +16,7 @@ namespace HotelReservationDataLayer.Model
             public string City { get; set; }
             public string Address { get; set; }
             public string Distance { get; set; }
-            public string Photos { get; set; } // JSON string or you can use List<Photo>
+            public List<PhotoDTO> Photos { get; set; } // JSON string or you can use List<Photo>
             public string Rooms { get; set; }  // JSON string or use List<Room>
             public string Title { get; set; }
             public string Description { get; set; }
@@ -29,7 +30,7 @@ namespace HotelReservationDataLayer.Model
         string City,
         string Address,
         string Distance,
-        string Photos,
+        List<PhotoDTO> Photos,
         string Rooms,
         string Title,
         string Description,
@@ -49,6 +50,12 @@ namespace HotelReservationDataLayer.Model
         this.CheapestPrice = CheapestPrice;
         this.Featured = Featured;
     }
+
+
+        public class PhotoDTO
+        {
+            public string PhotoURL { get; set; }
+        }
 
 
     }

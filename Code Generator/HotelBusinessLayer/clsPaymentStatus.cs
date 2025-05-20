@@ -18,19 +18,19 @@
     {
         return new PaymentStatusDTO(
 	  this.PaymentStatusID, 
-	  this.PaymentStatusName, 
+	  this.StatusName, 
        );
     }
 }
 
                           	 public int PaymentStatusID  {get; set;}
-	 public string PaymentStatusName  {get; set;}
+	 public string StatusName  {get; set;}
 
                           
 public clsPaymentStatus() { 	
  this.PaymentStatusID = -1;
 	
- this.PaymentStatusName = "";
+ this.StatusName = "";
 
     Mode = enMode.AddNew;
 }
@@ -39,7 +39,7 @@ public clsPaymentStatus() {
 
 this.PaymentStatusID = paymentstatus.PaymentStatusID ;
 
-this.PaymentStatusName = paymentstatus.PaymentStatusName ;
+this.StatusName = paymentstatus.StatusName ;
 
 Mode = mode;
 }

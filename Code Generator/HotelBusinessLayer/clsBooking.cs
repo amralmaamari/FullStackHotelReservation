@@ -19,26 +19,22 @@
         return new BookingDTO(
 	  this.BookingID, 
 	  this.UserID, 
-	  this.RoomInstancesID, 
+	  this.CheckIn, 
+	  this.CheckOut, 
 	  this.BookingStatusID, 
-	  this.ApplicationStatus, 
 	  this.CreatedAt, 
 	  this.UpdatedAt, 
-	  this.PaidFees, 
-	  this.CreatedByUserID, 
        );
     }
 }
 
                           	 public int BookingID  {get; set;}
 	 public int UserID  {get; set;}
-	 public int RoomInstancesID  {get; set;}
+	 public DateTime CheckIn  {get; set;}
+	 public DateTime CheckOut  {get; set;}
 	 public int BookingStatusID  {get; set;}
-	 public int ApplicationStatus  {get; set;}
 	 public DateTime CreatedAt  {get; set;}
 	 public DateTime UpdatedAt  {get; set;}
-	 public decimal PaidFees  {get; set;}
-	 public int CreatedByUserID  {get; set;}
 
                           
 public clsBooking() { 	
@@ -46,19 +42,15 @@ public clsBooking() {
 	
  this.UserID = -1;
 	
- this.RoomInstancesID = -1;
+ this.CheckIn = DateTime.Now;
+	
+ this.CheckOut = DateTime.Now;
 	
  this.BookingStatusID = -1;
-	
- this.ApplicationStatus = -1;
 	
  this.CreatedAt = DateTime.Now;
 	
  this.UpdatedAt = DateTime.Now;
-	
- this.PaidFees = 0m;
-	
- this.CreatedByUserID = -1;
 
     Mode = enMode.AddNew;
 }
@@ -69,19 +61,15 @@ this.BookingID = booking.BookingID ;
 
 this.UserID = booking.UserID ;
 
-this.RoomInstancesID = booking.RoomInstancesID ;
+this.CheckIn = booking.CheckIn ;
+
+this.CheckOut = booking.CheckOut ;
 
 this.BookingStatusID = booking.BookingStatusID ;
-
-this.ApplicationStatus = booking.ApplicationStatus ;
 
 this.CreatedAt = booking.CreatedAt ;
 
 this.UpdatedAt = booking.UpdatedAt ;
-
-this.PaidFees = booking.PaidFees ;
-
-this.CreatedByUserID = booking.CreatedByUserID ;
 
 Mode = mode;
 }

@@ -1,0 +1,15 @@
+
+                GO
+              CREATE FUNCTION SF_GetAllsysdiagrams()
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT * FROM sysdiagrams
+);
+
+
+             
+     }
+  
+ 

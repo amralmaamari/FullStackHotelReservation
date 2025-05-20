@@ -24,7 +24,7 @@ namespace HotelDataAccessLayer
         public DateTime UpdatedAt { get; set; }
 
 
-        public UserDTO(int UserID, string Username, string Email, string Password, int CountryID, string Image, string City, bool IsAdmin, DateTime CreatedAt, DateTime UpdatedAt)
+        public UserDTO(int UserID, string Username, string Email, string Password, int CountryID, string Image , string City , bool IsAdmin, DateTime CreatedAt, DateTime UpdatedAt)
         {
             this.UserID = UserID;
             this.Username = Username;
@@ -94,7 +94,7 @@ namespace HotelDataAccessLayer
         public static Nullable<int> AddNewUsers(UserDTO users)
         {
 
-            Nullable<int> NewUsersID = null;
+            Nullable<int> NewUsersID = -1;
             using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
             {
                 connection.Open();
@@ -110,8 +110,8 @@ namespace HotelDataAccessLayer
                         command.Parameters.AddWithValue("@Email", users.Email);
                         command.Parameters.AddWithValue("@Password", users.Password);
                         command.Parameters.AddWithValue("@CountryID", users.CountryID);
-                        command.Parameters.AddWithValue("@Image", users.Image);
-                        command.Parameters.AddWithValue("@City", users.City);
+                        command.Parameters.Add("@Image", SqlDbType.NVarChar, 100).Value = !string.IsNullOrEmpty(users.Image) ? (object)users.Image : DBNull.Value;
+                        command.Parameters.Add("@City", SqlDbType.NVarChar, 100).Value = !string.IsNullOrEmpty(users.City) ? (object)users.City : DBNull.Value;
                         command.Parameters.AddWithValue("@IsAdmin", users.IsAdmin);
                         command.Parameters.AddWithValue("@CreatedAt", users.CreatedAt);
                         command.Parameters.AddWithValue("@UpdatedAt", users.UpdatedAt);
@@ -131,7 +131,9 @@ namespace HotelDataAccessLayer
 
                     }
                 }
-                catch (Exception ex) { }
+                catch (Exception ex) {
+
+                }
 
                 return NewUsersID;
             }
@@ -155,6 +157,57 @@ namespace HotelDataAccessLayer
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@UserID", UserID);
+
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                return new UserDTO(
+
+                                UserID: (int)reader["UserID"],
+                                Username: (string)reader["Username"],
+                                Email: (string)reader["Email"],
+                                Password: (string)reader["Password"],
+                                CountryID: reader["CountryID"] == DBNull.Value ? 0 : (int)reader["CountryID"],
+                                Image: reader["Image"] == DBNull.Value ? null : (string)reader["Image"],
+                                City: reader["City"] == DBNull.Value ? null : (string)reader["City"],
+                                IsAdmin: (bool)reader["IsAdmin"],
+                                CreatedAt: (DateTime)reader["CreatedAt"],
+                                UpdatedAt: (DateTime)reader["UpdatedAt"]
+
+
+
+                                );
+
+                            }
+                        }
+
+                    }
+                }
+                catch (Exception ex) { }
+
+                return null;
+            }
+
+
+        }
+
+        public static UserDTO GetUsersInfoByEmail(string Email)
+        {
+
+            using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
+            {
+                connection.Open();
+
+
+
+                try
+                {
+                    using (SqlCommand command = new SqlCommand("SP_GetUsersInfoByEmail", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@Email", Email);
 
 
                         using (SqlDataReader reader = command.ExecuteReader())

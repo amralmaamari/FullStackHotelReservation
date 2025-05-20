@@ -157,7 +157,7 @@ namespace HotelReservationAPI.Controllers
         [HttpPost("{id}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> AddRoomAvailability(int id,[FromBody] RoomUnavailableDatesDTO newroomUnavailableDatesDTO)
+        public async Task<ActionResult> AddRoomAvailability(int id, [FromBody] RoomUnavailableDatesDTO newroomUnavailableDatesDTO)
         {
             if ((id < 1))
             {
@@ -172,13 +172,13 @@ namespace HotelReservationAPI.Controllers
             if (newroomUnavailableDatesDTO.CheckIn >= newroomUnavailableDatesDTO.CheckOut)
             {
                 return BadRequest(new { success = false, message = "Check-in must be before check-out." });
-                
+
             }
 
 
             //here i have to check if the room have active dates 
             bool available = await clsRoomUnavailableDates.IsRoomAvailableBetweenDates(newroomUnavailableDatesDTO.RoomID, newroomUnavailableDatesDTO.CheckIn, newroomUnavailableDatesDTO.CheckOut);
-            if (!available) 
+            if (!available)
             {
                 return NotFound(new { success = false, message = "The Room is not Available between the Dates" });
 
@@ -192,7 +192,7 @@ namespace HotelReservationAPI.Controllers
                 return BadRequest(new { success = false, message = "RoomUnavailableDates could not be created." });
             }
 
-           
+
             return Ok(new { success = true, data = roomUnavailableDates });
 
 

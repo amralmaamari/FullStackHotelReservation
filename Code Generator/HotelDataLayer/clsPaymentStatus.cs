@@ -10,12 +10,12 @@
                 public class PaymentStatusDTO
                 {
                     	 public int PaymentStatusID  {get; set;}
-	 public string PaymentStatusName  {get; set;}
+	 public string StatusName  {get; set;}
             
                     
-            public PaymentStatusDTO( int  PaymentStatusID,  string  PaymentStatusName){
+            public PaymentStatusDTO( int  PaymentStatusID,  string  StatusName){
 this.PaymentStatusID = PaymentStatusID ;
-this.PaymentStatusName = PaymentStatusName ;   
+this.StatusName = StatusName ;   
                 }
                 }
                 
@@ -43,7 +43,7 @@ this.PaymentStatusName = PaymentStatusName ;
                         {
                             var paymentstatus = new PaymentStatusDTO(
                                 						 PaymentStatusID:(int)reader ["PaymentStatusID"] ,
-						 PaymentStatusName:(string)reader ["PaymentStatusName"] ,
+						 StatusName:(string)reader ["StatusName"] ,
 
                             );
 
@@ -77,7 +77,7 @@ this.PaymentStatusName = PaymentStatusName ;
                     {
                         command.CommandType = CommandType.StoredProcedure;
 
-                       						command.Parameters.AddWithValue("@PaymentStatusName", paymentstatus.PaymentStatusName);
+                       						command.Parameters.AddWithValue("@StatusName", paymentstatus.StatusName);
 ;
                         SqlParameter outputIdParam = new SqlParameter("@PaymentStatusID", SqlDbType.Int);
                         {
@@ -126,7 +126,7 @@ this.PaymentStatusName = PaymentStatusName ;
                             return  new PaymentStatusDTO(
 
                             						 PaymentStatusID:(int)reader ["PaymentStatusID"],
-						 PaymentStatusName:(string)reader ["PaymentStatusName"],
+						 StatusName:(string)reader ["StatusName"],
 
                             );
                         
@@ -159,7 +159,7 @@ this.PaymentStatusName = PaymentStatusName ;
                     {
                         command.CommandType = CommandType.StoredProcedure;
                        						command.Parameters.AddWithValue("@PaymentStatusID", paymentstatus.PaymentStatusID);
-						command.Parameters.AddWithValue("@PaymentStatusName", paymentstatus.PaymentStatusName);
+						command.Parameters.AddWithValue("@StatusName", paymentstatus.StatusName);
 ;
                         rowAffected = command.ExecuteNonQuery();
 

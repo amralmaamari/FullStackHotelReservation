@@ -107,7 +107,7 @@ namespace HotelReservationAPI.Controllers
             // Update properties using reflection
             existingUser.Username = userDTO.Username;
             existingUser.Password = userDTO.Password;
-            existingUser.CountryID = userDTO.CountryID;
+            existingUser.CountryID = userDTO.CountryID  ;
             existingUser.Image = userDTO.Image;
             existingUser.City = userDTO.City;
 

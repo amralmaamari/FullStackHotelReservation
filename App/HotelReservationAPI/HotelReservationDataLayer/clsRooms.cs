@@ -1,7 +1,9 @@
 
 using System;
 using System.Data;
+using Newtonsoft.Json;
 using HotelReservationDataLayer;
+using HotelReservationDataLayer.Model;
 using Microsoft.Data.SqlClient;
 
 
@@ -245,51 +247,57 @@ namespace HotelDataAccessLayer
 
 
 
-        public static List<RoomDTO> GetAllRoomsOfHotelID(int HotelID)
+        public static List<RoomReserveDTO> GetAllRoomsOfHotelID(int HotelID)
         {
-
-            List<RoomDTO> roomsList = new List<RoomDTO>();
+            List<RoomReserveDTO> roomsList = new List<RoomReserveDTO>();
             using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.connectionString))
             {
                 connection.Open();
+                string query = "SELECT * FROM FN_GetAllRoomsOfHotelID(@HotelID)";
 
-                string Query = "select * From FN_GetAllRoomsOfHotelID(@HotelID)";
                 try
                 {
-                    using (SqlCommand command = new SqlCommand(Query, connection))
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.CommandType = CommandType.Text;
                         command.Parameters.AddWithValue("@HotelID", HotelID);
 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-
                             while (reader.Read())
                             {
-                             var rooms = new RoomDTO(
-                             RoomID: (int)reader["RoomID"],
-                             RoomTypeID: (int)reader["RoomTypeID"],
-                             HotelID: (int)reader["HotelID"],
-                             RoomNumber: (string)reader["RoomNumber"],
-                             Price: (decimal)reader["Price"],
-                             CreatedAt: (DateTime)reader["CreatedAt"],
-                             UpdateAt: (DateTime)reader["UpdateAt"]);
+                                var roomNumbersJson = reader["RoomNumbers"].ToString();
+                                var roomNumbers = JsonConvert.DeserializeObject<List<RoomReserveDTO.RoomNumberDTO>>(roomNumbersJson);
 
-                             roomsList.Add(rooms);
+                                var room = new RoomReserveDTO
+                                (
+                                    HotelID: reader.GetInt32(reader.GetOrdinal("HotelID")),
+                                    Price: reader.GetDecimal(reader.GetOrdinal("Price")),
+                                    RoomTypeID: reader.GetInt32(reader.GetOrdinal("RoomTypeID")),
+                                    Title: reader.GetString(reader.GetOrdinal("Title")),
+                                    MaxPeople: reader.GetInt32(reader.GetOrdinal("MaxPeople")),
+                                    Description: reader.GetString(reader.GetOrdinal("Description")),
+                                    RoomNumbers: roomNumbers
+                                );
+
+                                roomsList.Add(room);
                             }
                         }
-
                     }
                 }
-                catch (Exception ex) { }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error in GetAllRoomsOfHotelID: " + ex.Message);
+                    // Consider rethrowing the exception or handling it as needed
+                    throw;  // Rethrowing the exception preserves the original stack trace
+                }
 
                 return roomsList;
             }
-
-
         }
 
 
+    
     }
 }
 
